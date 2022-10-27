@@ -9,7 +9,9 @@ import add_edit_user from "./components/add_edit_user";
 import {NavigationContainer} from "@react-navigation/native";
 import UserList from "./components/userList";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import UserDetails from "./components/userDetails";
+import PostDetails from "./components/userDetails";
+import postList from "./components/postList";
+import add_edit_post from "./components/add_edit_post";
 
 
 export default function App() {
@@ -42,8 +44,11 @@ export default function App() {
     return(
         <Stack.Navigator>
           <Stack.Screen name={'User List'} component={UserList}/>
-          <Stack.Screen name={'User Details'} component={UserDetails}/>
+          <Stack.Screen name={'User Details'} component={PostDetails}/>
           <Stack.Screen name={'Edit user'} component={Add_edit_user}/>
+            <Stack.Screen name={'Post List'} component={postList}/>
+            <Stack.Screen name={'Post Details'} component={postList}/>
+            <Stack.Screen name={'Edit post'} component={add_edit_post}/>
         </Stack.Navigator>
     )
   }

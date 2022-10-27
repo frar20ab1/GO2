@@ -4,54 +4,54 @@ import firebase from 'firebase/compat';
 import {useEffect, useState} from "react";
 
 // begynder her hele funktionen til at tilføje og redigerer opslag til platformen
-const Add_edit_opslag = ({navigation,route}) => {
+const Add_edit_Post = ({navigation,route}) => {
 
     //først definerer jeg initialState til at være tomt
-    const initialState = { opslag:''}
+    const initialState = { navn: '', post:''}
 
     //bruger useState metoden til at håndtere states
-    const [newOpslag, setNewOpslag] = useState(initialState)
+    const [newPost, setNewPost] = useState(initialState)
 
     // sætter routen til Edit Opslag
-    const isOpslagEdit = route.name === "Edit Opslag"
+    const isPostEdit = route.name === "Edit Post"
 
     //her en funktion til at håndtere effekten af en ny bruger
     useEffect(() => {
-        if (isOpslagEdit) {
-            const Opslag = route.params.user[1]
-            setNewOpslag(Opslag)
+        if (isPostEdit) {
+            const Post = route.params.post[1]
+            setNewPost(Post)
         }
         //returnerer med initialState
         return () => {
-            setNewOpslag(initialState)
+            setNewPost(initialState)
         }
     }, [])
 
     const changeTextInput = (name, event) => {
-        setNewOpslag({...newOpslag, [name]: event})
+        setNewPost({...newPost, [name]: event})
     }
 
     // nu laver jeg en funktion til at håndtere at man gemmer brugeren
     const handleSave = () => {
-        const opslag = newOpslag
+        const {navn, post} = newPost
 
         //først hvis der ikke står noget er det ikke muligt
-        if (opslag.length === 0 ) {
+        if (navn.length === 0 || post.length === 0 ) {
             return Alert.alert('feltet er ikke udfyldt')
         }
 
-        if (isOpslagEdit) {
-            const id = route.params.opslag[0]
+        if (isPostEdit) {
+            const id = route.params.post[0]
 
             //den skal først prøve at update brugeren
             try {
                 firebase.database()
-                    .ref(`/Opslag/${id}`)
+                    .ref(`/Posts/${id}`)
                     // Jeg angiver i update hvilke felter der skal opdateres
-                    .update({opslag});
+                    .update({post});
                 Alert.alert("Dit opslag er nu opdateret")
-                const opslag = (id, newOpslag)
-                navigation.navigate("Opslag Details", {opslag});
+                const post = (id, newPost)
+                navigation.navigate("Opslag Details", {post});
             }
                 //kaster en fejl hvis der er en
             catch (error) {
@@ -61,10 +61,10 @@ const Add_edit_opslag = ({navigation,route}) => {
         }else{
             //meddele at brugeren er gemt
             try {
-                firebase.database().ref('/Users')
-                    .push({opslag})
-                Alert.alert("Bruger Gemt")
-                setNewOpslag(initialState);
+                firebase.database().ref('/Posts')
+                    .push({post})
+                Alert.alert("Post Gemt")
+                setNewPost(initialState);
 
             } catch (error) {
                 //ellers kast en fejl
@@ -84,7 +84,7 @@ const Add_edit_opslag = ({navigation,route}) => {
                         return(
                             <View style={styles.row} key={index}>
                                 <Text style={styles.label} > {key} </Text>
-                                <TextInput value={newOpslag[key]}
+                                <TextInput value={newPost[key]}
                                            onChangeText={(event) => changeTextInput(key,event)}
                                            style={styles.input}>
 
@@ -94,7 +94,7 @@ const Add_edit_opslag = ({navigation,route}) => {
                     })
                 }
                 {/*Hvis man går i edit bruger, skal der stå gæm ændringer og ikke tilføj bruger*/}
-                <Button title={ isOpslagEdit ? "Gem" : "Gem"} onPress={() => handleSave()}>
+                <Button title={ isPostEdit ? "Gem" : "Gem"} onPress={() => handleSave()}>
                 </Button>
             </ScrollView>
 
@@ -103,7 +103,7 @@ const Add_edit_opslag = ({navigation,route}) => {
     )
 }
 
-export default Add_edit_opslag;
+export default Add_edit_Post;
 
 
 //styles til styling af hele appen

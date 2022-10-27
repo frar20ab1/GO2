@@ -4,31 +4,31 @@ import firebase from 'firebase/compat';
 import {useEffect, useState} from "react";
 
 
-// component til at vise detaljer om en bruger
-const OpslagDetails = ({route, navigation}) => {
+// component til at vise detaljer om et opslag
+const PostDetails = ({route, navigation}) => {
 
     // bruger usestate til at definere objektets initial state
-    const [opslag, setOpslag] = useState({});
+    const [post, setPost] = useState({});
 
     useEffect(() => {
-        setOpslag(route.params.opslag[1]);
+        setPost(route.params.post[1]);
         /*Henter opslaget og sætter values ind i return*/
         return () => {
             //når jeg går væk fra skærmen, skal den tømme objektet
-            setOpslag({})
+            setPost({})
         }
     });
 
     // funktion til at håndterer edit
     const handleEdit = () => {
-        /*Går til edit user routen */
-        const opslag = route.params.opslag
-        //navigerer til edit user og sender bilen med videre
-        navigation.navigate('Edit opslag', {opslag})
+        /*Går til edit opslag routen */
+        const post = route.params.post
+        //navigerer til edit opslag og sender opslaget med videre
+        navigation.navigate('Edit post', {post})
     };
 
-    //funktion til at håndtere delete user
-    const deleteOpslag = () => {
+    //funktion til at håndtere delete opslag
+    const deletePost = () => {
         //Sikre mig lige hvilken platform det er på
         if(Platform.OS === 'android' || Platform.OS === 'ios') {
             Alert.alert('Er du sikker?', 'Vil du slette dette opslag', [
@@ -41,10 +41,10 @@ const OpslagDetails = ({route, navigation}) => {
 
     //funktion til at håndtere delete af en user
     const handleDelete = () => {
-        const id = route.params.opslag[0]
+        const id = route.params.post[0]
         try {
-            //bruger users id til at navigere til bilen, og fjerner alt der ligger til dette objekt
-            firebase.database().ref(`/Opslag/${id}`).remove();
+            //bruger opslags id til at navigere til opslaget, og fjerner alt der ligger til dette objekt
+            firebase.database().ref(`/Posts/${id}`).remove();
             // til sidst går jeg tilbage til den i navigation stacken
             navigation.goBack();
         }
@@ -55,7 +55,7 @@ const OpslagDetails = ({route, navigation}) => {
     };
 
     // if statement til hvis der ingen data er på opslag
-    if (!opslag) {
+    if (!post) {
         return <Text>Ingen data</Text>;
     }
 
@@ -67,11 +67,11 @@ const OpslagDetails = ({route, navigation}) => {
             {/* 2 knapper til edit og delete, som har hver deres funktion*/}
             <Button title='Edit' onPress={ () => handleEdit()}>
             </Button>
-            <Button title='Delete' onPress={() => deleteOpslag()}>
+            <Button title='Delete' onPress={() => deletePost()}>
             </Button>
 
             {
-                Object.entries(opslag).map((item,index) => {
+                Object.entries(post).map((item,index) => {
                     return (
                         <View style={styles.row} key={index}>
                             <Text style={styles.label}>
@@ -93,7 +93,7 @@ const OpslagDetails = ({route, navigation}) => {
     )
 }
 
-export default OpslagDetails;
+export default PostDetails;
 
 //styles til siderne og de forskellige dele af skærmen
 const styles = StyleSheet.create({

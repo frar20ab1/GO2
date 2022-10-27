@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 
 
 // component til at vise detaljer om en bruger
-const UserDetails = ({route, navigation}) => {
+const PostDetails = ({route, navigation}) => {
 
     // bruger usestate til at definere objektets initial state
     const [user, setUser] = useState({});
@@ -93,7 +93,7 @@ const UserDetails = ({route, navigation}) => {
     )
 }
 
-export default UserDetails;
+export default PostDetails;
 
 //styles til siderne og de forskellige dele af skærmen
 const styles = StyleSheet.create({
