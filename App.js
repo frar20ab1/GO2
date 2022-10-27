@@ -21,16 +21,15 @@ export default function App() {
 
 
 // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyCtRBk1CNFOD9aZUC5mArHdDc0b68uaJ3o",
-    authDomain: "godkendelsesopgave1-a1c57.firebaseapp.com",
-    databaseURL:"https://godkendelsesopgave1-a1c57-default-rtdb.europe-west1.firebasedatabase.app/",
-    projectId: "godkendelsesopgave1-a1c57",
-    storageBucket: "godkendelsesopgave1-a1c57.appspot.com",
-    messagingSenderId: "118450841898",
-    appId: "1:118450841898:web:1ecddbcd3b21477e48d653"
-  };
-
+    const firebaseConfig = {
+        apiKey: "AIzaSyA20PDALXFMyIcVjWWmwdC3zhzMebOg9Ys",
+        authDomain: "godkendelsesopgave2-6ea69.firebaseapp.com",
+        projectId: "godkendelsesopgave2-6ea69",
+        storageBucket: "godkendelsesopgave2-6ea69.appspot.com",
+        messagingSenderId: "461200022464",
+        appId: "1:461200022464:web:b091bdecf68c615167c625",
+        databaseURL: "https://godkendelsesopgave2-6ea69-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
 
 
   if (!firebase.apps.length) {
@@ -55,6 +54,7 @@ export default function App() {
           {/* tabs der kan ses i bunden af appen*/}
           <Tab.Screen name={'Hjem'} component={StackNavigation} options={{tabBarIcon: () => ( <Ionicons name="home" size={20} />),headerShown:null}}/>
           <Tab.Screen name={'Tilføj bruger'} component={add_edit_user} options={{tabBarIcon: () => ( <Ionicons name="add" size={20} />)}}/>
+            <Tab.Screen name={'Tilføj opslag'} component={add_edit_opslag} options={{tabBarIcon: () => ( <Ionicons name="add" size={20} />)}}/>
         </Tab.Navigator>
       </NavigationContainer>
   );
