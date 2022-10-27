@@ -7,33 +7,33 @@ import {useEffect, useState} from "react";
 const PostList = ({navigation}) => {
 
     // bruger usestate til at definere objektets initial state
-    const [post, setPost] = useState()
+    const [posts, setPosts] = useState()
 
 
     useEffect(() => {
-        if(!post) {
-            firebase.database().ref('/opslag').on("value", snapshot => {
-                setPost(snapshot.val())
+        if(!posts) {
+            firebase.database().ref('/Posts').on("value", snapshot => {
+                setPosts(snapshot.val())
             })
         }
     }, []);
 
 
 
-    //hvis der ikke er nogle brugere endnu
-    if(!post) {
+    //hvis der ikke er nogle brugere endnus
+    if(!posts) {
         return <Text>Vent... De kommer</Text>
     }
 
     const handleSelectPost = id => {
         /* søger i vores array af users og finde den der matcher id´et */
-        const post = Object.entries(post).find(post => post[0] === id)
+        const post = Object.entries(posts).find(post => post[0] === id)
         navigation.navigate('Post Details', {post});
     };
 
     //Metoden flatlist forventer et array. Derfor bruges alle values fra vores users objekter og bruger til array
-    const postArray = Object.values(post)
-    const postKeys = Object.keys(post)
+    const postArray = Object.values(posts)
+    const postKeys = Object.keys(posts)
 
     // returnerer hvordan det skal vises
     return (
@@ -62,10 +62,11 @@ const styles = StyleSheet.create({
         borderWidth: 5,
         borderRadius:10,
         margin: 10,
+        marginTop: 20,
         padding: 10,
         height: 50,
         justifyContent:'center',
-        backgroundColor: "green",
+        backgroundColor: "lightblue",
 
     },
     label: { fontWeight: 'bold' },
