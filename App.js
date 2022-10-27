@@ -13,7 +13,7 @@ import postList from "./components/postList";
 import add_edit_post from "./components/add_edit_post";
 import postDetails from "./components/postDetails";
 import userDetails from "./components/userDetails";
-
+import HomeScreen from "./components/homeScreen";
 
 
 export default function App() {
@@ -59,6 +59,7 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator>
           {/* tabs der kan ses i bunden af appen*/}
+            <Tab.Screen name={'Start'} component={HomeScreen} options={{tabBarIcon: () => ( <Ionicons name="home" size={20} />)}}/>
           <Tab.Screen name={'Beboere'} component={StackNavigation} options={{tabBarIcon: () => ( <Ionicons name="home" size={20} />),headerShown:null}}/>
           <Tab.Screen name={'Tilføj beboer'} component={add_edit_user} options={{tabBarIcon: () => ( <Ionicons name="person-add-outline" size={20} />)}}/>
             <Tab.Screen name={'Oplagstavle'} component={postList} options={{tabBarIcon: () => ( <Ionicons name="clipboard-outline" size={20} />),headerShown:null}}/>

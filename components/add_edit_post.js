@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 const Add_edit_Post = ({navigation,route}) => {
 
     //først definerer jeg initialState til at være tomt
-    const initialState = { navn: '', post:''}
+    const initialState = { navn: '', post: ''}
 
     //bruger useState metoden til at håndtere states
     const [newPost, setNewPost] = useState(initialState)
@@ -48,7 +48,7 @@ const Add_edit_Post = ({navigation,route}) => {
                 firebase.database()
                     .ref(`/Posts/${id}`)
                     // Jeg angiver i update hvilke felter der skal opdateres
-                    .update({post});
+                    .update({navn, post});
                 Alert.alert("Dit opslag er nu opdateret")
                 const post = (id, newPost)
                 navigation.navigate("Opslag Details", {post});
@@ -62,7 +62,7 @@ const Add_edit_Post = ({navigation,route}) => {
             //meddele at brugeren er gemt
             try {
                 firebase.database().ref('/Posts')
-                    .push({post})
+                    .push({navn, post})
                 Alert.alert("Post Gemt")
                 setNewPost(initialState);
 
