@@ -1,6 +1,5 @@
-import {StatusBar} from "expo-status-bar";
 import * as React from 'react';
-import {View, Text, StyleSheet, Image, ImageBackground} from 'react-native';
+import {View, Text, StyleSheet, ImageBackground} from 'react-native';
 
 import DefaultImage from '../assets/nabologo.jpeg';
 

@@ -60,7 +60,7 @@ export default function App() {
         <Tab.Navigator>
           {/* tabs der kan ses i bunden af appen*/}
             <Tab.Screen name={'Start'} component={HomeScreen} options={{tabBarIcon: () => ( <Ionicons name="home" size={20} />)}}/>
-          <Tab.Screen name={'Beboere'} component={StackNavigation} options={{tabBarIcon: () => ( <Ionicons name="home" size={20} />),headerShown:null}}/>
+          <Tab.Screen name={'Beboere'} component={StackNavigation} options={{tabBarIcon: () => ( <Ionicons name="people-outline" size={20} />),headerShown:null}}/>
           <Tab.Screen name={'Tilføj beboer'} component={add_edit_user} options={{tabBarIcon: () => ( <Ionicons name="person-add-outline" size={20} />)}}/>
             <Tab.Screen name={'Oplagstavle'} component={postList} options={{tabBarIcon: () => ( <Ionicons name="clipboard-outline" size={20} />),headerShown:null}}/>
             <Tab.Screen name={'Tilføj opslag'} component={add_edit_post} options={{tabBarIcon: () => ( <Ionicons name="md-create" size={20} />)}}/>
